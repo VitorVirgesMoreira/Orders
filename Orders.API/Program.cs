@@ -4,11 +4,8 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using Orders.Application.Commands;
 using Orders.Domain.DTOs;
-using Orders.Domain.Entities;
-using Orders.Domain.Interfaces;
 using Orders.Infra.Context;
 using Orders.Infra.Data;
-using Orders.Infra.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +21,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddSingleton<MongoDbContext>();
-
-builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
 
 builder.Services.AddAutoMapper(typeof(OrderDto).Assembly);
 
